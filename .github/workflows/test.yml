@@ -1,7 +1,7 @@
-name: Test Docker Container
+name: Test Docker Container Detached
 
 on:
-  workflow_dispatch: # allows manual trigger
+  workflow_dispatch:
 
 jobs:
   run-container:
@@ -11,5 +11,5 @@ jobs:
       - name: Pull Docker image
         run: docker pull alpine:latest
 
-      - name: Run container
-        run: docker run --rm alpine:latest echo "Hello from inside the container"
+      - name: Run container in detached mode
+        run: docker run -d --name test-alpine alpine:latest tail -f /dev/null
