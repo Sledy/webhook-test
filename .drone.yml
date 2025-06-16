@@ -9,8 +9,8 @@ steps:
       - name: gradle-cache
         path: /home/gradle/.gradle
     commands:
-      - ./gradlew assemble
-      - ./gradlew check
+      - ./gradle assemble
+      - ./gradle check
 
 #  - name: docker publish
 #    image: plugins/docker
