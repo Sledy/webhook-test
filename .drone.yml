@@ -10,7 +10,3 @@ services:
     image: mysql
     ports:
       - 3306
-
-trigger:
-  event:
-    - push
