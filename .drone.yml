@@ -4,23 +4,24 @@ name: default
 
 steps:
   - name: build
-    image: gradle:8-jdk17  # Match your Gradle and JDK version
+    image: gradle:8-jdk17
     volumes:
       - name: gradle-cache
         path: /home/gradle/.gradle
     commands:
-      - ./gradlew clean bootBuildImage --no-daemon
+      - ./gradlew assemble
+      - ./gradlew check
 
-  - name: docker publish
-    image: plugins/docker
-    settings:
-      repo: your-username/your-app
-      tags: latest
-      registry: DockerRegistry:5000
-      auto_tag: true
-      when:
-        branch:
-          - main
+#  - name: docker publish
+#    image: plugins/docker
+#    settings:
+#      repo: sledy/test-app
+#      tags: latest
+#      registry: DockerRegistry:5000
+#      auto_tag: true
+#      when:
+#        branch:
+#          - main
 
 volumes:
   - name: gradle-cache
