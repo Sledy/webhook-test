@@ -9,6 +9,7 @@ steps:
       - name: gradle-cache
         path: /home/gradle/.gradle
     commands:
+      - pwd
       - ./gradle assemble
       - ./gradle check
 
