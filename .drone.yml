@@ -11,8 +11,8 @@ steps:
     commands:
       - which java
       - java --version
-      - ./gradle assemble
-      - ./gradle check
+      - ./gradlew assemble
+      - ./gradlew check
 
 #  - name: docker publish
 #    image: plugins/docker
