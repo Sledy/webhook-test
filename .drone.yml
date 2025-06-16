@@ -1,12 +1,27 @@
 kind: pipeline
+type: docker
+name: default
+
 steps:
-  - name: test
-    image: node
+  - name: build
+    image: gradle:8-jdk17  # Match your Gradle and JDK version
+    volumes:
+      - name: gradle-cache
+        path: /home/gradle/.gradle
     commands:
-      - npm install
-      - npm test
-services:
-  - name: database
-    image: mysql
-    ports:
-      - 3306
+      - ./gradlew clean bootBuildImage --no-daemon
+
+  - name: docker publish
+    image: plugins/docker
+    settings:
+      repo: your-username/your-app
+      tags: latest
+      registry: DockerRegistry:5000
+      auto_tag: true
+      when:
+        branch:
+          - main
+
+volumes:
+  - name: gradle-cache
+    temp: {}
