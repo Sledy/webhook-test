@@ -1,20 +1,16 @@
 kind: pipeline
-type: docker
-name: postgres-only
-
-# Define the Postgres service
-services:
-  postgres:
-    image: postgres:14           # pick your version
-    environment:
-      POSTGRES_USER: dbuser
-      POSTGRES_PASSWORD: dbpass
-      POSTGRES_DB: mydb
-
-# A no‐op step to keep the pipeline alive long enough for Postgres to start
 steps:
-  - name: keep-alive
-    image: busybox:latest
+  - name: test
+    image: node
     commands:
-      - echo "Postgres is now running on host 'postgres', port 5432"
-      - sleep 300     # adjust duration as needed
+      - npm install
+      - npm test
+services:
+  - name: database
+    image: mysql
+    ports:
+      - 3306
+
+trigger:
+  event:
+    - push
