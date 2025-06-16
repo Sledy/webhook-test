@@ -9,7 +9,8 @@ steps:
       - name: gradle-cache
         path: /home/gradle/.gradle
     commands:
-      - whoami
+      - which java
+      - java --version
       - ./gradle assemble
       - ./gradle check
 
