@@ -4,7 +4,7 @@ name: default
 
 steps:
   - name: build
-    image: gradle:8-jdk17
+    image: gradle:jdk21-corretto
     volumes:
       - name: gradle-cache
         path: /home/gradle/.gradle
